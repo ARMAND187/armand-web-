@@ -4,9 +4,10 @@ import { useState, useEffect } from 'react';
 import { Play, Pause, SkipForward, SkipBack, Power } from 'lucide-react';
 
 export default function Home() {
-  const images = [
-    '/media_1.png',
-    '/media_2.jpg'
+  const mediaList = [
+    { type: 'video', src: '/trimmed_3_20s_Kawoz_barbie.mp4' },
+    { type: 'image', src: '/media_1.png' },
+    { type: 'image', src: '/media_2.jpg' }
   ];
   
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -18,14 +19,14 @@ export default function Home() {
     let interval: NodeJS.Timeout;
     if (isPlaying && isPowerOn) {
       interval = setInterval(() => {
-        setCurrentIndex((prev) => (prev + 1) % images.length);
+        setCurrentIndex((prev) => (prev + 1) % mediaList.length);
       }, 10000); // 10000 ms = 10 seconds
     }
     return () => clearInterval(interval);
-  }, [isPlaying, isPowerOn, images.length]);
+  }, [isPlaying, isPowerOn, mediaList.length]);
 
-  const nextImage = () => setCurrentIndex((prev) => (prev + 1) % images.length);
-  const prevImage = () => setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
+  const nextImage = () => setCurrentIndex((prev) => (prev + 1) % mediaList.length);
+  const prevImage = () => setCurrentIndex((prev) => (prev - 1 + mediaList.length) % mediaList.length);
   const togglePlay = () => setIsPlaying(!isPlaying);
   const togglePower = () => setIsPowerOn(!isPowerOn);
 
@@ -45,12 +46,23 @@ export default function Home() {
           {/* Screen */}
           <div className={`relative w-full h-full rounded-lg md:rounded-xl overflow-hidden bg-black transition-all duration-700 ${isPowerOn ? 'shadow-[0_0_20px_rgba(255,255,255,0.1)] md:shadow-[0_0_40px_rgba(255,255,255,0.15)]' : 'brightness-0'}`}>
             {isPowerOn ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img 
-                src={images[currentIndex]} 
-                alt="TV Screen" 
-                className="w-full h-full object-cover transition-opacity duration-500"
-              />
+              mediaList[currentIndex].type === 'video' ? (
+                <video 
+                  src={mediaList[currentIndex].src} 
+                  autoPlay 
+                  loop 
+                  muted 
+                  playsInline 
+                  className="w-full h-full object-cover transition-opacity duration-500"
+                />
+              ) : (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img 
+                  src={mediaList[currentIndex].src} 
+                  alt="TV Screen" 
+                  className="w-full h-full object-cover transition-opacity duration-500"
+                />
+              )
             ) : (
               <div className="w-full h-full bg-black"></div>
             )}
