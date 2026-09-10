@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Play, Pause, SkipForward, SkipBack, Power } from 'lucide-react';
+import { Play, Pause, SkipForward, SkipBack, Power, Volume2, VolumeX } from 'lucide-react';
 
 export default function Home() {
   const mediaList = [
@@ -13,6 +13,7 @@ export default function Home() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
   const [isPowerOn, setIsPowerOn] = useState(true);
+  const [isMuted, setIsMuted] = useState(true);
 
   // 10-second timer
   useEffect(() => {
@@ -29,6 +30,7 @@ export default function Home() {
   const prevImage = () => setCurrentIndex((prev) => (prev - 1 + mediaList.length) % mediaList.length);
   const togglePlay = () => setIsPlaying(!isPlaying);
   const togglePower = () => setIsPowerOn(!isPowerOn);
+  const toggleMute = () => setIsMuted(!isMuted);
 
   return (
     <main className="min-h-screen bg-zinc-950 flex flex-col items-center justify-center p-4 md:p-8 font-sans text-white overflow-x-hidden">
@@ -51,7 +53,7 @@ export default function Home() {
                   src={mediaList[currentIndex].src} 
                   autoPlay 
                   loop 
-                  muted 
+                  muted={isMuted}
                   playsInline 
                   className="w-full h-full object-cover transition-opacity duration-500"
                 />
@@ -76,13 +78,23 @@ export default function Home() {
         <div className="bg-zinc-800 p-6 md:p-8 rounded-3xl md:rounded-[2.5rem] shadow-2xl border-2 border-zinc-700 flex flex-col items-center gap-6 md:gap-8 w-full max-w-[280px] lg:w-[220px] shrink-0">
           <div className="w-8 md:w-10 h-2 md:h-3 bg-zinc-900 rounded-full mb-1 md:mb-2 shadow-inner shadow-black/50"></div> {/* Remote IR sensor */}
           
-          {/* Power Button */}
-          <button 
-            onClick={togglePower}
-            className={`w-14 h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center shadow-lg transition-transform hover:scale-105 active:scale-95 ${isPowerOn ? 'bg-red-500 text-white shadow-red-500/30' : 'bg-red-900 text-red-400 border border-red-800'}`}
-          >
-            <Power size={24} />
-          </button>
+          <div className="flex w-full justify-between px-2">
+            {/* Power Button */}
+            <button 
+              onClick={togglePower}
+              className={`w-14 h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center shadow-lg transition-transform hover:scale-105 active:scale-95 ${isPowerOn ? 'bg-red-500 text-white shadow-red-500/30' : 'bg-red-900 text-red-400 border border-red-800'}`}
+            >
+              <Power size={24} />
+            </button>
+
+            {/* Mute Button */}
+            <button 
+              onClick={toggleMute}
+              className="w-14 h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center shadow-lg transition-transform hover:scale-105 active:scale-95 bg-zinc-700 text-white border border-zinc-600 hover:bg-zinc-600 active:shadow-inner"
+            >
+              {isMuted ? <VolumeX size={24} className="text-zinc-400" /> : <Volume2 size={24} />}
+            </button>
+          </div>
 
           {/* Next/Prev Buttons */}
           <div className="grid grid-cols-2 gap-3 md:gap-4 w-full">
