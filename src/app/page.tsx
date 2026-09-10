@@ -35,10 +35,10 @@ export default function Home() {
         The Kawoz TV
       </h1>
       
-      <div className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-16 w-full max-w-7xl">
+      <div className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-12 w-full max-w-5xl xl:max-w-6xl">
         
         {/* TV Set */}
-        <div className="relative w-full max-w-5xl aspect-video bg-zinc-900 rounded-2xl md:rounded-[2rem] p-2 md:p-4 border-4 md:border-[8px] border-zinc-800 shadow-[0_0_40px_rgba(0,0,0,0.9)] md:shadow-[0_0_80px_rgba(0,0,0,0.9)] shadow-black flex items-center justify-center transition-all duration-300 lg:hover:scale-[1.01]">
+        <div className="relative w-full lg:max-w-2xl xl:max-w-3xl aspect-video bg-zinc-900 rounded-2xl md:rounded-[2rem] p-2 md:p-4 border-4 md:border-[8px] border-zinc-800 shadow-[0_0_40px_rgba(0,0,0,0.9)] md:shadow-[0_0_80px_rgba(0,0,0,0.9)] shadow-black flex items-center justify-center transition-all duration-300 lg:hover:scale-[1.01]">
           {/* Brand logo space */}
           <div className="absolute bottom-0.5 md:bottom-1 w-full text-center text-[8px] md:text-[10px] text-zinc-600 font-bold uppercase tracking-widest">Vision</div>
           
@@ -61,7 +61,7 @@ export default function Home() {
         </div>
 
         {/* Remote Control */}
-        <div className="bg-zinc-800 p-6 md:p-8 rounded-3xl md:rounded-[2.5rem] shadow-2xl border-2 border-zinc-700 flex flex-col items-center gap-6 md:gap-8 w-full max-w-[280px] lg:min-w-[240px]">
+        <div className="bg-zinc-800 p-6 md:p-8 rounded-3xl md:rounded-[2.5rem] shadow-2xl border-2 border-zinc-700 flex flex-col items-center gap-6 md:gap-8 w-full max-w-[280px] lg:w-[220px] shrink-0">
           <div className="w-8 md:w-10 h-2 md:h-3 bg-zinc-900 rounded-full mb-1 md:mb-2 shadow-inner shadow-black/50"></div> {/* Remote IR sensor */}
           
           {/* Power Button */}
