@@ -30,18 +30,20 @@ export default function Home() {
   const togglePower = () => setIsPowerOn(!isPowerOn);
 
   return (
-    <main className="min-h-screen bg-zinc-950 flex flex-col items-center justify-center p-4 font-sans text-white">
-      <h1 className="text-3xl font-bold mb-12 text-zinc-500 tracking-[0.3em] uppercase">The Kawoz TV</h1>
+    <main className="min-h-screen bg-zinc-950 flex flex-col items-center justify-center p-4 md:p-8 font-sans text-white overflow-x-hidden">
+      <h1 className="text-xl md:text-3xl font-bold mb-6 md:mb-12 text-zinc-500 tracking-[0.2em] md:tracking-[0.3em] uppercase text-center">
+        The Kawoz TV
+      </h1>
       
-      <div className="flex flex-col lg:flex-row items-center gap-16">
+      <div className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-16 w-full max-w-7xl">
         
         {/* TV Set */}
-        <div className="relative w-full max-w-4xl aspect-video bg-zinc-900 rounded-[2rem] p-4 border-[8px] border-zinc-800 shadow-[0_0_80px_rgba(0,0,0,0.9)] shadow-black flex items-center justify-center transition-all duration-300 hover:scale-[1.01]">
+        <div className="relative w-full max-w-5xl aspect-video bg-zinc-900 rounded-2xl md:rounded-[2rem] p-2 md:p-4 border-4 md:border-[8px] border-zinc-800 shadow-[0_0_40px_rgba(0,0,0,0.9)] md:shadow-[0_0_80px_rgba(0,0,0,0.9)] shadow-black flex items-center justify-center transition-all duration-300 lg:hover:scale-[1.01]">
           {/* Brand logo space */}
-          <div className="absolute bottom-1 w-full text-center text-[10px] text-zinc-600 font-bold uppercase tracking-widest">Vision</div>
+          <div className="absolute bottom-0.5 md:bottom-1 w-full text-center text-[8px] md:text-[10px] text-zinc-600 font-bold uppercase tracking-widest">Vision</div>
           
           {/* Screen */}
-          <div className={`relative w-full h-full rounded-xl overflow-hidden bg-black transition-all duration-700 ${isPowerOn ? 'shadow-[0_0_40px_rgba(255,255,255,0.15)]' : 'brightness-0'}`}>
+          <div className={`relative w-full h-full rounded-lg md:rounded-xl overflow-hidden bg-black transition-all duration-700 ${isPowerOn ? 'shadow-[0_0_20px_rgba(255,255,255,0.1)] md:shadow-[0_0_40px_rgba(255,255,255,0.15)]' : 'brightness-0'}`}>
             {isPowerOn ? (
               // eslint-disable-next-line @next/next/no-img-element
               <img 
@@ -59,37 +61,37 @@ export default function Home() {
         </div>
 
         {/* Remote Control */}
-        <div className="bg-zinc-800 p-8 rounded-[2.5rem] shadow-2xl border-2 border-zinc-700 flex flex-col items-center gap-8 min-w-[200px]">
-          <div className="w-10 h-3 bg-zinc-900 rounded-full mb-2 shadow-inner shadow-black/50"></div> {/* Remote IR sensor */}
+        <div className="bg-zinc-800 p-6 md:p-8 rounded-3xl md:rounded-[2.5rem] shadow-2xl border-2 border-zinc-700 flex flex-col items-center gap-6 md:gap-8 w-full max-w-[280px] lg:min-w-[240px]">
+          <div className="w-8 md:w-10 h-2 md:h-3 bg-zinc-900 rounded-full mb-1 md:mb-2 shadow-inner shadow-black/50"></div> {/* Remote IR sensor */}
           
           {/* Power Button */}
           <button 
             onClick={togglePower}
-            className={`w-16 h-16 rounded-full flex items-center justify-center shadow-lg transition-transform hover:scale-105 active:scale-95 ${isPowerOn ? 'bg-red-500 text-white shadow-red-500/30' : 'bg-red-900 text-red-400 border border-red-800'}`}
+            className={`w-14 h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center shadow-lg transition-transform hover:scale-105 active:scale-95 ${isPowerOn ? 'bg-red-500 text-white shadow-red-500/30' : 'bg-red-900 text-red-400 border border-red-800'}`}
           >
             <Power size={24} />
           </button>
 
           {/* Next/Prev Buttons */}
-          <div className="grid grid-cols-2 gap-4 w-full">
-            <button onClick={prevImage} className="bg-zinc-700 hover:bg-zinc-600 p-5 rounded-2xl flex justify-center shadow-[0_4px_10px_rgba(0,0,0,0.3)] active:scale-95 active:shadow-inner transition-all border border-zinc-600 text-zinc-300">
-              <SkipBack size={24} />
+          <div className="grid grid-cols-2 gap-3 md:gap-4 w-full">
+            <button onClick={prevImage} className="bg-zinc-700 hover:bg-zinc-600 p-4 md:p-5 rounded-2xl flex justify-center shadow-[0_4px_10px_rgba(0,0,0,0.3)] active:scale-95 active:shadow-inner transition-all border border-zinc-600 text-zinc-300">
+              <SkipBack size={20} className="md:w-6 md:h-6" />
             </button>
-            <button onClick={nextImage} className="bg-zinc-700 hover:bg-zinc-600 p-5 rounded-2xl flex justify-center shadow-[0_4px_10px_rgba(0,0,0,0.3)] active:scale-95 active:shadow-inner transition-all border border-zinc-600 text-zinc-300">
-              <SkipForward size={24} />
+            <button onClick={nextImage} className="bg-zinc-700 hover:bg-zinc-600 p-4 md:p-5 rounded-2xl flex justify-center shadow-[0_4px_10px_rgba(0,0,0,0.3)] active:scale-95 active:shadow-inner transition-all border border-zinc-600 text-zinc-300">
+              <SkipForward size={20} className="md:w-6 md:h-6" />
             </button>
           </div>
 
           {/* Play/Pause Button */}
           <button 
             onClick={togglePlay} 
-            className="w-full bg-zinc-700 hover:bg-zinc-600 py-6 rounded-2xl flex justify-center shadow-[0_4px_10px_rgba(0,0,0,0.3)] active:scale-95 active:shadow-inner transition-all border border-zinc-600 text-zinc-300"
+            className="w-full bg-zinc-700 hover:bg-zinc-600 py-5 md:py-6 rounded-2xl flex justify-center shadow-[0_4px_10px_rgba(0,0,0,0.3)] active:scale-95 active:shadow-inner transition-all border border-zinc-600 text-zinc-300"
           >
-            {isPlaying ? <Pause size={32} /> : <Play size={32} />}
+            {isPlaying ? <Pause size={28} className="md:w-8 md:h-8" /> : <Play size={28} className="md:w-8 md:h-8" />}
           </button>
           
           {/* Remote Label */}
-          <div className="mt-6 text-xs text-zinc-500 font-bold tracking-[0.2em] text-center uppercase">
+          <div className="mt-2 md:mt-6 text-[10px] md:text-xs text-zinc-500 font-bold tracking-[0.2em] text-center uppercase">
             Controller
           </div>
         </div>
