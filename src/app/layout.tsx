@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Friend AI",
-  description: "A fun AI chat website based on my friends",
+  title: "The Kawoz TV",
+  description: "A custom interactive TV experience.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
