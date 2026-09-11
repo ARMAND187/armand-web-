@@ -42,20 +42,20 @@ export default function AdvicePage() {
         Life lessons, business strategies, and comedy gold straight from the source.
       </p>
       
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
+      <div className="grid grid-cols-2 gap-3 md:gap-6 w-full">
         {advices.map((advice) => (
           <div 
             key={advice.id} 
-            className="bg-zinc-900 p-8 rounded-3xl border border-zinc-800 hover:border-zinc-600 transition-colors shadow-lg flex flex-col justify-between group"
+            className="bg-zinc-900 p-4 md:p-8 rounded-2xl md:rounded-3xl border border-zinc-800 hover:border-zinc-600 transition-colors shadow-lg flex flex-col justify-between group"
           >
-            <p className="text-lg md:text-xl font-medium text-zinc-200 leading-relaxed italic">
+            <p className="text-xs md:text-xl font-medium text-zinc-200 leading-relaxed italic">
               "{advice.quote}"
             </p>
-            <div className="mt-8 flex items-center gap-3">
-              <div className="w-8 h-8 rounded-full bg-zinc-700 flex items-center justify-center font-bold text-xs text-zinc-300">
+            <div className="mt-4 md:mt-8 flex items-center gap-2 md:gap-3">
+              <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-zinc-700 flex items-center justify-center font-bold text-[10px] md:text-xs text-zinc-300">
                 K
               </div>
-              <span className="text-xs font-bold text-zinc-500 uppercase tracking-[0.2em]">
+              <span className="text-[9px] md:text-xs font-bold text-zinc-500 uppercase tracking-[0.1em] md:tracking-[0.2em]">
                 {advice.author}
               </span>
             </div>
