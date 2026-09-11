@@ -33,10 +33,11 @@ export default function AdvicePage() {
   ];
 
   return (
-    <main className="flex-1 flex flex-col items-center p-6 md:p-12 font-sans overflow-x-hidden w-full max-w-5xl mx-auto">
-      <h1 className="text-3xl md:text-5xl font-bold mb-4 text-white tracking-widest uppercase text-center mt-8">
-        Kawoz Advice
-      </h1>
+    <main className="flex-1 flex flex-col items-center p-6 md:p-12 font-sans overflow-y-auto overflow-x-hidden w-full mx-auto">
+      <div className="w-full max-w-5xl mx-auto">
+        <h1 className="text-3xl md:text-5xl font-bold mb-4 text-white tracking-widest uppercase text-center mt-8">
+          Kawoz Advice
+        </h1>
       <p className="text-zinc-400 mb-12 text-center text-sm md:text-base tracking-wide">
         Life lessons, business strategies, and comedy gold straight from the source.
       </p>
@@ -60,6 +61,7 @@ export default function AdvicePage() {
             </div>
           </div>
         ))}
+      </div>
       </div>
     </main>
   );

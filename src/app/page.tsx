@@ -33,12 +33,12 @@ export default function Home() {
   const toggleMute = () => setIsMuted(!isMuted);
 
   return (
-    <main className="min-h-screen bg-zinc-950 flex flex-col items-center justify-center p-4 md:p-8 font-sans text-white overflow-x-hidden">
-      <h1 className="text-xl md:text-3xl font-bold mb-6 md:mb-12 text-zinc-500 tracking-[0.2em] md:tracking-[0.3em] uppercase text-center">
+    <main className="flex-1 h-full w-full bg-zinc-950 flex flex-col items-center justify-center p-2 md:p-4 font-sans text-white overflow-hidden">
+      <h1 className="text-xl md:text-3xl font-bold mb-4 md:mb-8 text-zinc-500 tracking-[0.2em] md:tracking-[0.3em] uppercase text-center">
         The Kawoz TV
       </h1>
       
-      <div className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-12 w-full max-w-5xl xl:max-w-6xl">
+      <div className="flex flex-col lg:flex-row items-center justify-center gap-6 lg:gap-10 w-full max-w-5xl xl:max-w-6xl">
         
         {/* TV Set */}
         <div className="relative w-full lg:max-w-2xl xl:max-w-3xl aspect-video bg-zinc-900 rounded-2xl md:rounded-[2rem] p-2 md:p-4 border-4 md:border-[8px] border-zinc-800 shadow-[0_0_40px_rgba(0,0,0,0.9)] md:shadow-[0_0_80px_rgba(0,0,0,0.9)] shadow-black flex items-center justify-center transition-all duration-300 lg:hover:scale-[1.01]">
