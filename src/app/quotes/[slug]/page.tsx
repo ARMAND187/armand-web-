@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { createClient } from "../../../../utils/supabase/server";
+import { createClient } from "@/utils/supabase/server";
 import Link from "next/link";
 import { Metadata } from "next";
 import { Quote as QuoteIcon } from "lucide-react";
@@ -9,8 +9,9 @@ type Props = { params: Promise<{ slug: string }> };
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const params = await props.params;
   const supabase = await createClient();
-  const { data: quote } = await supabase.from("works").select("title_english, text_english, authors(name_english)").eq("slug", params.slug).single();
+  const { data } = await supabase.from("works").select("title_english, text_english, authors(name_english)").eq("slug", params.slug).single();
   
+  const quote: any = data;
   if (!quote) return { title: "Quote Not Found" };
   
   return {
@@ -24,12 +25,13 @@ export default async function QuotePage(props: Props) {
   const supabase = await createClient();
   
   // Fetch Quote
-  const { data: quote } = await supabase
+  const { data } = await supabase
     .from("works")
     .select("*, authors(*), sources(*)")
     .eq("slug", params.slug)
     .single();
     
+  const quote: any = data;
   if (!quote || (quote.type !== 'quote' && quote.type !== 'proverb')) {
     return notFound();
   }

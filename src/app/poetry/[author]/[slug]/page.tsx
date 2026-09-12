@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { createClient } from "../../../../../utils/supabase/server";
+import { createClient } from "@/utils/supabase/server";
 import Link from "next/link";
 import { Metadata } from "next";
 
@@ -8,8 +8,9 @@ type Props = { params: Promise<{ author: string; slug: string }> };
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const params = await props.params;
   const supabase = await createClient();
-  const { data: work } = await supabase.from("works").select("title_english, title_kurdish, description_english, authors!inner(slug, name_english)").eq("slug", params.slug).eq("authors.slug", params.author).single();
+  const { data } = await supabase.from("works").select("title_english, title_kurdish, description_english, authors!inner(slug, name_english)").eq("slug", params.slug).eq("authors.slug", params.author).single();
   
+  const work: any = data;
   if (!work) return { title: "Poem Not Found" };
   
   const title = work.title_english || work.title_kurdish || "Poem";
@@ -24,13 +25,14 @@ export default async function PoemPage(props: Props) {
   const supabase = await createClient();
   
   // Verify author matches the work
-  const { data: work } = await supabase
+  const { data } = await supabase
     .from("works")
     .select("*, authors!inner(*), sources(*)")
     .eq("slug", params.slug)
     .eq("authors.slug", params.author)
     .single();
     
+  const work: any = data;
   if (!work || work.type !== 'poem') {
     return notFound();
   }

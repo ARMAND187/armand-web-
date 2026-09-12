@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { createClient } from "../../../../utils/supabase/server";
+import { createClient } from "@/utils/supabase/server";
 import Link from "next/link";
 import { Metadata } from "next";
 

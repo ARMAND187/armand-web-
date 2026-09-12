@@ -1,16 +1,21 @@
 import Link from "next/link";
 import { ArrowRight, BookOpen, Quote, User, MessageCircle, Search as SearchIcon } from "lucide-react";
-import { createClient } from "../utils/supabase/server";
+import { createClient } from "@/utils/supabase/server";
 
 export default async function Home() {
   // Initialize Supabase Server Client
   const supabase = await createClient();
 
   // Fetch real data from the database
-  const { data: poem } = await supabase.from('works').select('*, authors(*)').eq('type', 'poem').limit(1).single();
-  const { data: quote } = await supabase.from('works').select('*').in('type', ['quote', 'proverb']).limit(1).single();
-  const { data: word } = await supabase.from('words').select('*').limit(1).single();
-  const { data: author } = await supabase.from('authors').select('*').eq('slug', 'nali').limit(1).single();
+  const { data: poemData } = await supabase.from('works').select('*, authors(*)').eq('type', 'poem').limit(1).single();
+  const { data: quoteData } = await supabase.from('works').select('*').in('type', ['quote', 'proverb']).limit(1).single();
+  const { data: wordData } = await supabase.from('words').select('*').limit(1).single();
+  const { data: authorData } = await supabase.from('authors').select('*').eq('slug', 'nali').limit(1).single();
+
+  const poem: any = poemData;
+  const quote: any = quoteData;
+  const word: any = wordData;
+  const author: any = authorData;
 
   return (
     <main className="w-full">
