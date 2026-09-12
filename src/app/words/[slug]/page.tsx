@@ -2,13 +2,15 @@ import { notFound } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
 import Link from "next/link";
 import { Metadata } from "next";
+import BackButton from "@/components/BackButton";
 
 type Props = { params: Promise<{ slug: string }> };
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const params = await props.params;
   const supabase = await createClient();
-  const { data: word } = await supabase.from("words").select("*").eq("slug", params.slug).single();
+  const slug = decodeURIComponent(params.slug);
+  const { data: word } = await supabase.from("words").select("*").eq("slug", slug).single();
   
   if (!word) return { title: "Word Not Found" };
   
@@ -21,23 +23,22 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 export default async function WordPage(props: Props) {
   const params = await props.params;
   const supabase = await createClient();
+  const slug = decodeURIComponent(params.slug);
   
   // Fetch word
-  const { data: word } = await supabase.from("words").select("*").eq("slug", params.slug).single();
+  const { data: word } = await supabase.from("words").select("*").eq("slug", slug).single();
   
   if (!word) {
     return notFound();
   }
 
   return (
-    <main className="max-w-3xl mx-auto px-4 md:px-8 py-12 md:py-20 w-full flex-1">
+    <main className="max-w-4xl mx-auto px-4 md:px-8 py-12 md:py-20 w-full flex-1 flex flex-col justify-center">
       
       {/* Back Navigation */}
-      <Link href="/words" className="text-zinc-500 hover:text-zinc-300 transition-colors text-sm font-medium uppercase tracking-widest flex items-center gap-2 mb-12">
-        ← Back to Dictionary
-      </Link>
+      <BackButton fallbackText="Back" />
 
-      <article className="bg-zinc-900/30 border border-zinc-800 rounded-3xl p-8 md:p-12 relative overflow-hidden">
+      <article className="border border-zinc-800 rounded-3xl p-8 md:p-12 bg-zinc-900/30 relative overflow-hidden">
         
         {/* Subtle Background Accent */}
         <div className="absolute top-0 right-0 w-64 h-64 bg-zinc-800/20 blur-3xl rounded-full -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>

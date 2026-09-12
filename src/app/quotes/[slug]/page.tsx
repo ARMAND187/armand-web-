@@ -3,13 +3,15 @@ import { createClient } from "@/utils/supabase/server";
 import Link from "next/link";
 import { Metadata } from "next";
 import { Quote as QuoteIcon } from "lucide-react";
+import BackButton from "@/components/BackButton";
 
 type Props = { params: Promise<{ slug: string }> };
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const params = await props.params;
   const supabase = await createClient();
-  const { data } = await supabase.from("works").select("title_english, text_english, authors(name_english)").eq("slug", params.slug).single();
+  const slug = decodeURIComponent(params.slug);
+  const { data } = await supabase.from("works").select("title_english, text_english, authors(name_english)").eq("slug", slug).single();
   
   const quote: any = data;
   if (!quote) return { title: "Quote Not Found" };
@@ -23,12 +25,13 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 export default async function QuotePage(props: Props) {
   const params = await props.params;
   const supabase = await createClient();
+  const slug = decodeURIComponent(params.slug);
   
   // Fetch Quote
   const { data } = await supabase
     .from("works")
     .select("*, authors(*), sources(*)")
-    .eq("slug", params.slug)
+    .eq("slug", slug)
     .single();
     
   const quote: any = data;
@@ -44,9 +47,7 @@ export default async function QuotePage(props: Props) {
       
       {/* Back Navigation */}
       <div className="w-full mb-12">
-        <Link href="/quotes" className="text-zinc-500 hover:text-zinc-300 transition-colors text-sm font-medium uppercase tracking-widest flex items-center gap-2">
-          ← Back to All Quotes
-        </Link>
+        <BackButton fallbackText="Back" />
       </div>
 
       <article className="w-full bg-zinc-900/40 border border-zinc-800 rounded-3xl p-8 md:p-16 relative">

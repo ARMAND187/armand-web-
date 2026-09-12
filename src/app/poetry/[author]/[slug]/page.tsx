@@ -3,12 +3,16 @@ import { createClient } from "@/utils/supabase/server";
 import Link from "next/link";
 import { Metadata } from "next";
 
+import BackButton from "@/components/BackButton";
+
 type Props = { params: Promise<{ author: string; slug: string }> };
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const params = await props.params;
   const supabase = await createClient();
-  const { data } = await supabase.from("works").select("title_english, title_kurdish, description_english, authors!inner(slug, name_english)").eq("slug", params.slug).eq("authors.slug", params.author).single();
+  const authorSlug = decodeURIComponent(params.author);
+  const slug = decodeURIComponent(params.slug);
+  const { data } = await supabase.from("works").select("title_english, title_kurdish, description_english, authors!inner(slug, name_english)").eq("slug", slug).eq("authors.slug", authorSlug).single();
   
   const work: any = data;
   if (!work) return { title: "Poem Not Found" };
@@ -24,12 +28,14 @@ export default async function PoemPage(props: Props) {
   const params = await props.params;
   const supabase = await createClient();
   
-  // Verify author matches the work
+  const authorSlug = decodeURIComponent(params.author);
+  const slug = decodeURIComponent(params.slug);
+
   const { data } = await supabase
     .from("works")
     .select("*, authors!inner(*), sources(*)")
-    .eq("slug", params.slug)
-    .eq("authors.slug", params.author)
+    .eq("slug", slug)
+    .eq("authors.slug", authorSlug)
     .single();
     
   const work: any = data;
@@ -43,10 +49,8 @@ export default async function PoemPage(props: Props) {
   return (
     <main className="max-w-3xl mx-auto px-4 md:px-8 py-12 md:py-20 w-full flex-1">
       
-      {/* Back to Author Navigation */}
-      <Link href={`/authors/${author.slug}`} className="text-zinc-500 hover:text-zinc-300 transition-colors text-sm font-medium uppercase tracking-widest flex items-center gap-2 mb-12">
-        ← Back to {author.name_english}
-      </Link>
+      {/* Back Navigation */}
+      <BackButton fallbackText={`Back`} />
 
       <article>
         {/* Title Section */}
