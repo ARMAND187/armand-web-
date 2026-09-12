@@ -27,15 +27,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               Kurdish Digital Archive
             </Link>
 
-            {/* Desktop Nav */}
-            <div className="hidden md:flex items-center gap-6 text-sm font-medium text-zinc-400">
-              <Link href="/archive" className="hover:text-zinc-100 transition-colors">Archive</Link>
-              <Link href="/poets" className="hover:text-zinc-100 transition-colors">Poets</Link>
-              <Link href="/poems" className="hover:text-zinc-100 transition-colors">Poems</Link>
-              <Link href="/quotes" className="hover:text-zinc-100 transition-colors">Quotes</Link>
-              <Link href="/words" className="hover:text-zinc-100 transition-colors">Words</Link>
-              <span className="w-px h-4 bg-zinc-800 mx-2"></span>
-              <Link href="/feed" className="hover:text-zinc-100 transition-colors">Feed</Link>
+            {/* Navigation */}
+            <div className="hidden md:flex items-center gap-8 text-sm font-medium uppercase tracking-widest text-zinc-400">
+              <Link href="/authors" className="hover:text-zinc-100 transition-colors">Authors</Link>
+              <Link href="/poetry" className="hover:text-zinc-100 transition-colors">Poetry</Link>
+              <Link href="/words" className="hover:text-zinc-100 transition-colors">Dictionary</Link>
+              <Link href="/feed" className="hover:text-zinc-100 transition-colors text-zinc-200">Feed</Link>
             </div>
 
             {/* Utilities */}
