@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Search, Globe, PlusSquare } from "lucide-react";
 import SearchBar from "@/components/SearchBar";
 import MobileNav from "@/components/MobileNav";
+import UserNavIcon from "@/components/profile/UserNavIcon";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
@@ -48,6 +49,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <Link href="/submit" className="hidden md:flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-100 bg-zinc-800 hover:bg-zinc-700 px-3 py-1.5 rounded-md transition-colors" title="Submit a work" aria-label="Submit a work">
                 <PlusSquare size={14} /> Submit
               </Link>
+              <UserNavIcon />
             </div>
             
           </div>
