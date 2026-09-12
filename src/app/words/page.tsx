@@ -7,9 +7,15 @@ export const metadata: Metadata = {
   description: "Browse the Kurdish dictionary.",
 };
 
+export const revalidate = 3600; // Cache for 1 hour
+
 export default async function DictionaryIndex() {
   const supabase = await createClient();
-  const { data: words } = await supabase.from("words").select("*").order("word_latin");
+  // PERFORMANCE: Only fetch required fields instead of SELECT *
+  const { data: words } = await supabase
+    .from("words")
+    .select("id, slug, word_kurdish, word_latin, meaning_english")
+    .order("word_latin");
 
   return (
     <main className="max-w-5xl mx-auto px-4 md:px-8 py-12 md:py-20 w-full flex-1">

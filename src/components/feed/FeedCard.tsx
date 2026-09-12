@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { Copy, Download, Share2, ExternalLink, CheckCircle, HelpCircle, AlertTriangle, Check } from "lucide-react";
+import { Copy, Download, Share2, ExternalLink, CheckCircle, HelpCircle, AlertTriangle, Check, Loader2 } from "lucide-react";
 import * as htmlToImage from 'html-to-image';
 import Link from "next/link";
 
@@ -12,6 +12,8 @@ interface FeedCardProps {
 export default function FeedCard({ work }: FeedCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
   const [copied, setCopied] = useState<string | null>(null);
+
+  const [isDownloading, setIsDownloading] = useState(false);
 
   const authorName = work.authors?.name_english || "Unknown Author";
   
@@ -54,7 +56,8 @@ export default function FeedCard({ work }: FeedCardProps) {
   };
 
   const handleDownload = async () => {
-    if (!cardRef.current) return;
+    if (!cardRef.current || isDownloading) return;
+    setIsDownloading(true);
     try {
       // Temporarily add a watermark for the image
       const watermark = document.createElement('div');
@@ -81,6 +84,8 @@ export default function FeedCard({ work }: FeedCardProps) {
       link.click();
     } catch (err) {
       console.error("Failed to download image", err);
+    } finally {
+      setIsDownloading(false);
     }
   };
 
@@ -149,8 +154,8 @@ export default function FeedCard({ work }: FeedCardProps) {
             {copied === 'link' ? <Check size={16}/> : <Share2 size={16} />}
           </button>
 
-          <button onClick={handleDownload} className="p-2.5 rounded-full bg-zinc-900 text-zinc-400 border border-zinc-800 hover:text-zinc-100 hover:bg-zinc-800 transition-colors" title="Download Image" aria-label="Download Image">
-            <Download size={16} />
+          <button onClick={handleDownload} disabled={isDownloading} className="p-2.5 rounded-full bg-zinc-900 text-zinc-400 border border-zinc-800 hover:text-zinc-100 hover:bg-zinc-800 transition-colors disabled:opacity-50" title="Download Image" aria-label="Download Image">
+            {isDownloading ? <Loader2 size={16} className="animate-spin" /> : <Download size={16} />}
           </button>
         </div>
 

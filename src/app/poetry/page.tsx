@@ -7,9 +7,16 @@ export const metadata: Metadata = {
   description: "Browse Kurdish poetry and classical literature.",
 };
 
+export const revalidate = 3600; // Cache for 1 hour
+
 export default async function PoetryIndex() {
   const supabase = await createClient();
-  const { data: poems } = await supabase.from("works").select("*, authors(*)").eq("type", "poem").order("created_at", { ascending: false });
+  // PERFORMANCE: Select only necessary fields, not all works fields + all authors fields
+  const { data: poems } = await supabase
+    .from("works")
+    .select("id, slug, title_kurdish, title_english, text_kurdish, authors(slug, name_english)")
+    .eq("type", "poem")
+    .order("created_at", { ascending: false });
 
   return (
     <main className="max-w-5xl mx-auto px-4 md:px-8 py-12 md:py-20 w-full flex-1">

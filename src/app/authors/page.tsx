@@ -7,9 +7,15 @@ export const metadata: Metadata = {
   description: "Browse all poets and authors in the archive.",
 };
 
+export const revalidate = 3600; // Cache for 1 hour
+
 export default async function AuthorsIndex() {
   const supabase = await createClient();
-  const { data: authors } = await supabase.from("authors").select("*").order("name_english");
+  // PERFORMANCE: Only fetch required fields instead of SELECT *
+  const { data: authors } = await supabase
+    .from("authors")
+    .select("id, slug, name_kurdish, name_english, image_url, era")
+    .order("name_english");
 
   return (
     <main className="max-w-5xl mx-auto px-4 md:px-8 py-12 md:py-20 w-full flex-1">

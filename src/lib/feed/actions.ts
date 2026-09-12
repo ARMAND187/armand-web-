@@ -8,8 +8,9 @@ export async function getFeedWorks(page: number, category: string | null = null)
   const start = (page - 1) * PAGE_SIZE;
   const end = start + PAGE_SIZE - 1;
 
+  // PERFORMANCE: Only fetch required fields for feed cards
   let query = supabase.from('works')
-    .select('*, authors(name_english, name_kurdish, slug)', { count: 'exact' })
+    .select('id, slug, type, text_kurdish, text_english, category, attribution_status, authors(name_english, name_kurdish, slug)', { count: 'exact' })
     .in('type', ['quote', 'proverb', 'poem'])
     .order('created_at', { ascending: false })
     .range(start, end);
