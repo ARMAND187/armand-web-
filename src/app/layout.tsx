@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import Link from "next/link";
-import { Search, Globe, PlusSquare } from "lucide-react";
+import { Search, PlusSquare } from "lucide-react";
 import SearchBar from "@/components/SearchBar";
 import MobileNav from "@/components/MobileNav";
 import UserNavIcon from "@/components/profile/UserNavIcon";
@@ -45,7 +45,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <Link href="/search" className="lg:hidden hover:text-zinc-100 transition-colors" title="Search" aria-label="Search">
                 <Search size={18} />
               </Link>
-              <button className="hover:text-zinc-100 transition-colors" title="Language: EN/KU" aria-label="Toggle Language"><Globe size={18} /></button>
               <Link href="/submit" className="hidden md:flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-100 bg-zinc-800 hover:bg-zinc-700 px-3 py-1.5 rounded-md transition-colors" title="Submit a work" aria-label="Submit a work">
                 <PlusSquare size={14} /> Submit
               </Link>
