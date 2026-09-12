@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight, BookOpen, Quote, User, MessageCircle, Search as SearchIcon } from "lucide-react";
 import { createClient } from "@/utils/supabase/server";
+import SearchBar from "@/components/SearchBar";
 
 export default async function Home() {
   // Initialize Supabase Server Client
@@ -29,15 +30,8 @@ export default async function Home() {
         </p>
 
         {/* Search Bar */}
-        <div className="w-full max-w-2xl relative mb-12">
-          <input 
-            type="text" 
-            placeholder="Search poets, poems, quotes, words..." 
-            className="w-full bg-zinc-900/50 border border-zinc-700 text-zinc-100 rounded-full py-4 pl-6 pr-12 focus:outline-none focus:border-zinc-500 focus:bg-zinc-900 transition-all placeholder:text-zinc-500 text-lg shadow-xl"
-          />
-          <button className="absolute right-4 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-zinc-100 transition-colors">
-            <SearchIcon size={20} />
-          </button>
+        <div className="w-full max-w-2xl mb-12">
+          <SearchBar />
         </div>
 
         {/* Primary Actions */}

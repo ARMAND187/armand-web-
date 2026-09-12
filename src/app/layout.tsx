@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import Link from "next/link";
 import { Search, Globe, PlusSquare } from "lucide-react";
+import SearchBar from "@/components/SearchBar";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
@@ -39,7 +40,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
             {/* Utilities */}
             <div className="flex items-center gap-4 text-zinc-400">
-              <button className="hover:text-zinc-100 transition-colors" title="Search"><Search size={18} /></button>
+              <div className="hidden lg:block w-64">
+                <SearchBar placeholder="Search archive..." className="!text-sm" />
+              </div>
+              <button className="lg:hidden hover:text-zinc-100 transition-colors" title="Search">
+                <Search size={18} />
+              </button>
               <button className="hover:text-zinc-100 transition-colors" title="Language: EN/KU"><Globe size={18} /></button>
               <button className="hidden md:flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-100 bg-zinc-800 hover:bg-zinc-700 px-3 py-1.5 rounded-md transition-colors">
                 <PlusSquare size={14} /> Submit
