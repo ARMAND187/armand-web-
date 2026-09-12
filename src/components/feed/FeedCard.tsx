@@ -132,15 +132,15 @@ export default function FeedCard({ work }: FeedCardProps) {
         <div className="flex items-center gap-2 md:gap-4">
           {/* Copy Actions Group */}
           <div className="flex bg-zinc-900 rounded-full p-1 border border-zinc-800">
-            <button onClick={() => handleCopy('kurdish')} className="px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800 transition-colors flex items-center gap-2">
+            <button aria-label="Copy Kurdish text" onClick={() => handleCopy('kurdish')} className="px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800 transition-colors flex items-center gap-2">
               {copied === 'kurdish' ? <Check size={14}/> : <Copy size={14} />} KU
             </button>
             {work.text_english && (
-              <button onClick={() => handleCopy('english')} className="px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800 transition-colors flex items-center gap-2">
+              <button aria-label="Copy English text" onClick={() => handleCopy('english')} className="px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800 transition-colors flex items-center gap-2">
                 {copied === 'english' ? <Check size={14}/> : <Copy size={14} />} EN
               </button>
             )}
-            <button onClick={() => handleCopy('both')} className="px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800 transition-colors flex items-center gap-2">
+            <button aria-label="Copy all text" onClick={() => handleCopy('both')} className="px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800 transition-colors flex items-center gap-2">
               {copied === 'both' ? <Check size={14}/> : <Copy size={14} />} ALL
             </button>
           </div>

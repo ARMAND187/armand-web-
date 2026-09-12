@@ -3,6 +3,7 @@ import { Inter, Playfair_Display } from "next/font/google";
 import Link from "next/link";
 import { Search, Globe, PlusSquare } from "lucide-react";
 import SearchBar from "@/components/SearchBar";
+import MobileNav from "@/components/MobileNav";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
@@ -40,11 +41,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <div className="hidden lg:block w-64">
                 <SearchBar placeholder="Search archive..." className="!text-sm" />
               </div>
-              <button className="lg:hidden hover:text-zinc-100 transition-colors" title="Search">
+              <Link href="/search" className="lg:hidden hover:text-zinc-100 transition-colors" title="Search" aria-label="Search">
                 <Search size={18} />
-              </button>
-              <button className="hover:text-zinc-100 transition-colors" title="Language: EN/KU"><Globe size={18} /></button>
-              <button className="hidden md:flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-100 bg-zinc-800 hover:bg-zinc-700 px-3 py-1.5 rounded-md transition-colors">
+              </Link>
+              <button className="hover:text-zinc-100 transition-colors" title="Language: EN/KU" aria-label="Toggle Language"><Globe size={18} /></button>
+              <button className="hidden md:flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-100 bg-zinc-800 hover:bg-zinc-700 px-3 py-1.5 rounded-md transition-colors" title="Submit a work" aria-label="Submit a work">
                 <PlusSquare size={14} /> Submit
               </button>
             </div>
@@ -53,15 +54,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </nav>
 
         {/* Main Content Area */}
-        <div className="flex-1 flex flex-col w-full">
+        <div className="flex-1 flex flex-col w-full pb-16 md:pb-0">
           {children}
         </div>
         
         {/* Simple Footer */}
-        <footer className="border-t border-zinc-900 py-8 text-center text-xs text-zinc-600 mt-auto">
+        <footer className="hidden md:block border-t border-zinc-900 py-8 text-center text-xs text-zinc-600 mt-auto">
           <p>Preserve → Explain → Verify → Discover → Share</p>
         </footer>
 
+        <MobileNav />
       </body>
     </html>
   );
